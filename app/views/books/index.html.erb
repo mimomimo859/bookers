@@ -1,35 +1,51 @@
-<%= notice %>
-
-<%= alert %>
+<div class="alert"><%= alert %></div>
 
 <h1>Books</h1>
-<p>Title</p>
-<p>Body</p>
-<% @books.each do |f| %>
+<table class="table1">
 
-<span><%= f.title %></span>
+ <thead>
+   <tr>
+    <th>Title</th><th>Body</th><th colspan="3"></th>
+   </tr>
+ </thead>
 
-<span><%= f.body %></span>
+ <tbody>
 
-<%= link_to "Show","/books/#{f.id}" %>
+    <% @books.each do |f| %>
+    <tr>
+     <td><span><%= f.title %></span></td>
+     <td><span><%= f.body %></span></td>
+     <td>
+      <%= link_to "Show","/books/#{f.id}" %>
+      <%= link_to "Edit","/books/#{f.id}/edit" %>
+      <%= link_to "Destroy","/books/#{f.id}",method: :delete,"data-confirm"=>"Are you sure?" %>
+    </td>
+    </tr>
+     <% end %>
+ </tbody>
 
-<%= link_to "Edit","/books/#{f.id}/edit" %>
+</table>
 
-<%= link_to "Destroy","/books/#{f.id}",method: :delete,"data-confirm"=>"Are you sure?" %>
-
+<h2>New book</h2>
+<% if @book.errors.any? %>
+<%= @book.errors.count %>errors prohibited this book from being saved:
+ <ul>
+   <% @book.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+   <% end %>
+ </ul>
 <% end %>
 
-
-<h1>New book</h1>
-<%= form_with model:Book.new do |f| %>
-
+<%= form_with model: @book do |f| %>
+<div class="field">
 <h4>Title</h4>
 <%= f.text_field:title %>
-
+</div>
+<div class="field">
 <h4>Body</h4>
 <%= f.text_area:body %>
+</div>
 
-<%= f.submit'Create Book' %>
+<div class="action"><%= f.submit'Create Book' %></div>
 
 <% end %>
-</html>

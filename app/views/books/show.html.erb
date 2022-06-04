@@ -1,16 +1,8 @@
-<!DOCTYPE html>
 <html>
-
-  <h3>Title:</h3>
-
-  <p><%= @book.title %></p>
-
-  <h3>Body:</h3>
-
-  <p><%= @book.body %></p>
-
-  <%= link_to "Edit","/books/@book/edit" %>
-
-　<%= link_to "Back","/books/@book" %>
-
+ <body>
+  <div class="notice"><%= notice %></div>
+  <P>Title:<%= @book.title %></P>
+  <P>Body:<%= @book.body %></p>
+  <p><%= link_to "Edit","/books/#{@book.id}/edit" %>|<%= link_to "Back","/books" %></p>
+ </body>
 </html>
